@@ -3,7 +3,7 @@ import { ColorModeProvider, ColorModeButton } from "@/components/ui/color-mode"
 import React from 'react'
 import CreateUserModal from './CreateUserModal';
 
-const Navbar = () => {
+const Navbar = ({setUsers}) => {
     return <Container maxW={"1000px"} >
             <Box
                 px={4}
@@ -53,7 +53,7 @@ const Navbar = () => {
                         </ColorModeButton>
                     </Box>
                     </ColorModeProvider>
-                    <CreateUserModal />
+                    <CreateUserModal setUsers={setUsers}/>
                     </Flex>
                 </Flex>
             

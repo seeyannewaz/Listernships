@@ -18,7 +18,7 @@ def create_internship():
 
         required_fields = {"name", "company", "description", "status"}
         for field in required_fields:
-            if field not in data:
+            if field not in data or not data.get(field):
                 return jsonify({"error": f'Missing required field: {field}'}), 400
 
         name = data.get("name")
@@ -41,7 +41,7 @@ def create_internship():
 
         db.session.commit()
 
-        return jsonify({"msg": "Internship created successfully"}),201
+        return jsonify(new_internship.to_json()),201
     except Exception as e:
         db.session.rollback()
         return jsonify({"error":str(e)}), 500
@@ -74,7 +74,19 @@ def update_internship(id):
         internship.name = data.get("name", internship.name)
         internship.company = data.get("company", internship.company)
         internship.description = data.get("description", internship.description)
-        internship.status = data.get("status", internship.status)
+         # Update status and adjust img_url if status has changed
+        new_status = data.get("status", internship.status)
+        if new_status != internship.status:
+            internship.status = new_status
+            # Update img_url based on the new status
+            if new_status == "Accepted":
+                internship.img_url = "https://img.icons8.com/?size=100&id=sz8cPVwzLrMP&format=png&color=000000"
+            elif new_status == "Rejected":
+                internship.img_url = "https://img.icons8.com/?size=100&id=T9nkeADgD3z6&format=png&color=000000"
+            elif new_status == "Pending":
+                internship.img_url = "https://img.icons8.com/?size=100&id=cjUb4tRvBCNt&format=png&color=000000"
+            else:
+                internship.img_url = None
         
         db.session.commit()
         return jsonify(internship.to_json()),200
