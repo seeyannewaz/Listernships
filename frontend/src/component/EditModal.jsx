@@ -101,11 +101,11 @@ function EditModal({setUsers, user}) {
                             </Field>
 
                         </Flex>
-                        <Field label={"Company Name"}>
+                        <Field label={"Description"}>
                                 <Textarea
                                     resize={"none"}
                                     overflow={"hidden"}
-                                    placeholder='Role, Start and End dates, etc.'
+                                    placeholder='Role, start and end dates, etc.'
                                     value = {inputs.description}
                                     onChange={(e) => setInputs((prev) => ({ ...prev, description: e.target.value}))}
                                 />

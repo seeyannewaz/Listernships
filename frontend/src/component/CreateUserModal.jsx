@@ -113,7 +113,7 @@ const CreateUserModal = ({setUsers}) => {
                                 <Textarea
                                     resize={"none"}
                                     overflow={"hidden"}
-                                    placeholder= 'Role, Start and End dates, etc.'
+                                    placeholder= 'Role, start and end dates, etc.'
                                     value={inputs.description}
                                     onChange={(e) => setInputs({...inputs, description: e.target.value})}
                                 />

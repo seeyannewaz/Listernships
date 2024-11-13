@@ -70,6 +70,10 @@ def update_internship(id):
             return jsonify({"error":"Internship not found"}),404
         
         data = request.json
+        required_fields = {"name", "company", "description", "status"}
+        for field in required_fields:
+            if field not in data or not data.get(field):
+                return jsonify({"error": f'Missing required field: {field}'}), 400
 
         internship.name = data.get("name", internship.name)
         internship.company = data.get("company", internship.company)
